@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>It's The Snake Game — Play the Classic Snake Online Free</title>
+<meta name="description" content="Play the classic Snake game free in your browser. Press space to start, steer with the arrow keys, eat the blocks and grow your snake to beat your high score. No download, no sign-up." />
+<link rel="canonical" href="https://itsthesnakegame.com/" />
+<meta name="theme-color" content="#1c1e18" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="It's The Snake Game" />
+<meta property="og:title" content="It's The Snake Game — Play Classic Snake Online Free" />
+<meta property="og:description" content="The classic Snake game, playable free in your browser. Space to start, arrow keys to steer, grow your snake and chase a new high score." />
+<meta property="og:url" content="https://itsthesnakegame.com/" />
+<meta property="og:image" content="https://itsthesnakegame.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="It's The Snake Game — Play Classic Snake Online Free" />
+<meta name="twitter:description" content="Play the classic Snake game free in your browser. Space to start, arrow keys to steer." />
+<meta name="twitter:image" content="https://itsthesnakegame.com/og-image.png" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23aebd94'/%3E%3Cg fill='%2320291a'%3E%3Crect x='6' y='6' width='5' height='5'/%3E%3Crect x='11' y='6' width='5' height='5'/%3E%3Crect x='16' y='6' width='5' height='5'/%3E%3Crect x='16' y='11' width='5' height='5'/%3E%3Crect x='16' y='16' width='5' height='5'/%3E%3Crect x='21' y='16' width='5' height='5'/%3E%3Crect x='21' y='21' width='5' height='5'/%3E%3C/g%3E%3Crect x='7' y='21' width='4' height='4' fill='%23e8b23a'/%3E%3C/svg%3E" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "It's The Snake Game",
+  "url": "https://itsthesnakegame.com/",
+  "description": "A free browser version of the classic Snake game. Steer the snake with the arrow keys, eat blocks to grow, and beat your high score.",
+  "genre": ["Arcade", "Casual"],
+  "gamePlatform": "Web Browser",
+  "applicationCategory": "Game",
+  "operatingSystem": "Any (browser-based)",
+  "playMode": "SinglePlayer",
+  "inLanguage": "en",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How do you start the Snake game?", "acceptedAnswer": { "@type": "Answer", "text": "Press the space bar to start. Once the snake is moving, steer it with the arrow keys." } },
+    { "@type": "Question", "name": "How do you control the snake?", "acceptedAnswer": { "@type": "Answer", "text": "Use the arrow keys (or W, A, S, D) to turn up, down, left and right. On a phone, swipe or use the on-screen pad." } },
+    { "@type": "Question", "name": "Is the Snake game free to play?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It's The Snake Game is completely free, runs in your browser, and needs no download or sign-up." } },
+    { "@type": "Question", "name": "How do you get a high score in Snake?", "acceptedAnswer": { "@type": "Answer", "text": "Each block you eat adds 10 points and makes the snake longer and slightly faster. Plan turns ahead, use the edges, and avoid boxing yourself in." } }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --shell:#1c1e18;--shell-2:#2a2d24;--lcd:#aebd94;--lcd-edge:#7f8c66;
+  --ink:#20291a;--amber:#e8b23a;--paper:#f3f1e7;--paper-ink:#22241d;--rule:#d9d6c6;--maxw:780px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--paper-ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+a{color:#7a5a0d;text-underline-offset:2px;}
+a:hover{color:#a5780f;}
+
+.site-head{border-bottom:1px solid var(--rule);background:var(--paper);}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;flex-wrap:wrap;}
+.brand{font-family:"Press Start 2P",monospace;font-size:13px;letter-spacing:.5px;color:var(--ink);text-decoration:none;line-height:1.5;}
+.brand span{color:var(--amber);}
+.site-nav{display:flex;gap:18px;flex-wrap:wrap;}
+.site-nav a{font-size:14px;color:var(--paper-ink);text-decoration:none;padding:4px 2px;border-bottom:2px solid transparent;}
+.site-nav a:hover,.site-nav a[aria-current="page"]{border-bottom-color:var(--amber);color:var(--ink);}
+
+.stage{background:radial-gradient(120% 90% at 50% -10%,#34382d 0%,var(--shell) 55%);padding:40px 16px 52px;}
+.console{max-width:560px;margin:0 auto;background:linear-gradient(180deg,var(--shell-2),var(--shell));border-radius:26px;padding:22px 22px 26px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.45);border:1px solid #34382d;}
+.console-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 4px;}
+.led{display:inline-flex;align-items:center;gap:8px;font-family:"VT323",monospace;font-size:20px;color:#9aa585;letter-spacing:1px;}
+.led::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);}
+.scoreboard{display:flex;gap:20px;font-family:"VT323",monospace;}
+.scoreboard div{text-align:right;color:#9aa585;font-size:15px;letter-spacing:1px;}
+.scoreboard b{display:block;font-size:26px;line-height:1;color:#cfd6bd;}
+
+.screen{position:relative;background:var(--lcd);border:6px solid var(--lcd-edge);border-radius:8px;box-shadow:inset 0 0 22px rgba(32,41,26,.35);overflow:hidden;}
+.screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(32,41,26,.05) 0 2px,transparent 2px 4px);}
+canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;}
+
+.overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:rgba(174,189,148,.82);color:var(--ink);}
+.overlay[hidden]{display:none;}
+.overlay h2{font-family:"Press Start 2P",monospace;font-size:clamp(13px,4vw,20px);margin:0 0 14px;line-height:1.5;}
+.overlay p{font-family:"VT323",monospace;font-size:22px;margin:0;}
+.overlay b{color:#0f1509;}
+
+.console-controls{margin-top:18px;text-align:center;}
+.btn{font-family:"Press Start 2P",monospace;font-size:11px;background:var(--amber);color:#241a02;border:none;padding:12px 18px;border-radius:8px;cursor:pointer;box-shadow:0 4px 0 #a67d16;transition:transform .05s,box-shadow .05s;}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #a67d16;}
+.dpad{display:none;margin:16px auto 0;width:168px;}
+.dpad-row{display:flex;justify-content:center;gap:8px;}
+.dpad button{width:52px;height:52px;font-size:20px;border:none;cursor:pointer;background:var(--shell-2);color:#cfd6bd;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+.dpad button:active{background:#3a3e31;}
+@media (hover:none) and (pointer:coarse){.dpad{display:block;}}
+
+main.content{padding:46px 0 20px;}
+h1{font-family:"Press Start 2P",monospace;font-size:clamp(18px,5vw,30px);line-height:1.4;margin:0 0 8px;color:var(--ink);}
+.lede{font-size:1.15rem;color:#4a4d40;margin:0 0 28px;}
+h2{font-family:"VT323",monospace;font-size:30px;letter-spacing:.5px;margin:40px 0 10px;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--rule);}
+h3{font-size:1.15rem;margin:24px 0 6px;}
+.content p,.content li{font-size:1.02rem;}
+.content ul,.content ol{padding-left:22px;}
+.content li{margin:6px 0;}
+.keys{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0;}
+.key{font-family:"VT323",monospace;font-size:19px;border:1px solid var(--rule);border-bottom-width:3px;border-radius:7px;padding:6px 12px;background:#fff;color:var(--ink);}
+.faq details{border:1px solid var(--rule);border-radius:10px;padding:4px 16px;margin:10px 0;background:#fff;}
+.faq summary{cursor:pointer;font-weight:600;padding:10px 0;list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::before{content:"＋ ";color:var(--amber);font-weight:700;}
+.faq details[open] summary::before{content:"－ ";}
+
+.ad-slot{max-width:728px;margin:30px auto;min-height:90px;display:flex;align-items:center;justify-content:center;color:#b6b3a4;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px dashed var(--rule);border-radius:8px;}
+
+.site-foot{margin-top:50px;border-top:1px solid var(--rule);background:#eceadf;padding:30px 0 40px;}
+.site-foot .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;}
+.site-foot nav{display:flex;flex-wrap:wrap;gap:8px 18px;}
+.site-foot a{color:#4a4d40;text-decoration:none;font-size:14px;}
+.site-foot a:hover{color:var(--ink);text-decoration:underline;}
+.site-foot small{color:#7c7f70;}
+
+.legal{font-size:.96rem;}
+.legal p{margin:8px 0;}
+.muted{font-size:.9rem;color:#7c7f70;}
+
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:10px 14px;z-index:10;}
+.skip:focus{left:8px;top:8px;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
+@media (max-width:560px){.brand{font-size:11px;}.console{padding:16px 16px 20px;border-radius:20px;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#play">Skip to the game</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top">IT'S THE<br>SNAKE<span>_</span>GAME</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#play" aria-current="page">Play</a>
+      <a href="#how">How to play</a>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="stage" id="play">
+  <div class="console" role="application" aria-label="Snake game console">
+    <div class="console-top">
+      <span class="led">POWER</span>
+      <div class="scoreboard">
+        <div>SCORE<b id="score">0</b></div>
+        <div>BEST<b id="high">0</b></div>
+      </div>
+    </div>
+    <div class="screen">
+      <canvas id="board" aria-label="Snake game board" role="img"></canvas>
+      <div class="overlay" id="overlay">
+        <h2 id="overlayTitle">It's the Snake Game</h2>
+        <p id="overlayBody">Press <b>Space</b> to start</p>
+      </div>
+    </div>
+    <div class="console-controls">
+      <button class="btn" id="startBtn" type="button">START / PAUSE</button>
+      <div class="dpad">
+        <div class="dpad-row"><button data-dir="up" aria-label="Up">▲</button></div>
+        <div class="dpad-row">
+          <button data-dir="left" aria-label="Left">◀</button>
+          <button data-dir="down" aria-label="Down">▼</button>
+          <button data-dir="right" aria-label="Right">▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="ad-slot" aria-hidden="true">Advertisement</div></div>
+
+<main class="content" id="top">
+  <div class="wrap">
+    <h1>It's The Snake Game</h1>
+    <p class="lede">The classic arcade Snake, rebuilt for the browser. Press space, steer with the arrows, and see how long your snake can grow before it bites its own tail.</p>
+
+    <h2 id="how">How to play</h2>
+    <p>Getting going takes one key. When the screen loads you'll see the start prompt — tap the space bar and the snake starts sliding.</p>
+    <div class="keys">
+      <span class="key">Space — start / pause</span>
+      <span class="key">↑ ↓ ← → — steer</span>
+      <span class="key">W A S D — also steer</span>
+      <span class="key">P — pause</span>
+    </div>
+    <p>Guide the snake onto the blinking block to eat it. Every block adds <strong>10 points</strong>, grows your snake by one segment, and nudges the speed up a touch. The game ends if you run into a wall or into your own tail — so the longer you get, the more carefully you have to plan your turns.</p>
+    <ul>
+      <li><strong>On desktop:</strong> arrow keys or WASD.</li>
+      <li><strong>On a phone or tablet:</strong> swipe in any direction, or use the on-screen pad below the screen.</li>
+      <li><strong>Your best score</strong> is saved on your own device, so you always have a target to beat.</li>
+    </ul>
+
+    <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    <h2>Tips for a higher score</h2>
+    <ol>
+      <li><strong>Think one move ahead.</strong> The snake can't reverse into itself, so decide your next turn before you reach the block, not as you arrive.</li>
+      <li><strong>Hug the edges.</strong> Running laps around the outside keeps the middle open and gives you room to react.</li>
+      <li><strong>Don't chase every block.</strong> If the food spawns in a tight spot, take the long way round rather than trapping yourself.</li>
+      <li><strong>Leave yourself an exit.</strong> As the snake fills the board, always keep a clear path back out of any pocket you enter.</li>
+    </ol>
+
+    <h2>A quick history of Snake</h2>
+    <p>Snake is one of the most-played video game concepts ever made. The idea dates back to the 1976 arcade game <em>Blockade</em>, but it reached hundreds of millions of players when a version shipped preloaded on Nokia mobile phones at the end of the 1990s. Its appeal has always been the same: rules you understand in seconds, and a difficulty curve you create yourself as your snake grows longer.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details><summary>How do I start the game?</summary><p>Press the space bar. The snake begins moving immediately — steer it with the arrow keys.</p></details>
+      <details><summary>Do I need to download or sign up for anything?</summary><p>No. The game runs entirely in your browser. There's nothing to install and no account to create.</p></details>
+      <details><summary>Can I play Snake on my phone?</summary><p>Yes. Swipe on the game screen to change direction, or tap the on-screen arrow pad that appears on touch devices.</p></details>
+      <details><summary>How is my high score saved?</summary><p>It's stored locally in your browser, so it stays on your device. Clearing your browser data will reset it.</p></details>
+      <details><summary>Is it really free?</summary><p>Completely free. The site is supported by advertising, which lets the game stay open to everyone.</p></details>
+    </div>
+
+    <h2 id="about">About</h2>
+    <p>It's The Snake Game is a free, browser-based take on one of the most familiar games ever made — no download, no account, just press space and play. It's built with plain HTML, CSS and JavaScript drawn onto a canvas, which keeps it fast and works across modern browsers without plugins. Your high score is stored locally on your own device, not on a server. The site is free to play and supported by advertising.</p>
+
+    <h2 id="privacy">Privacy Policy</h2>
+    <div class="legal">
+      <p><strong>Last updated: [DD Month 2026].</strong> This website, itsthesnakegame.com, provides a free browser-based Snake game, operated by [Your name or company], [country]. Contact: <a href="mailto:hello@itsthesnakegame.com">hello@itsthesnakegame.com</a>.</p>
+      <h3>Information we collect</h3>
+      <p>Your high score is stored in your browser's local storage on your own device — it is not sent to us. Like most websites, our hosting and any analytics may collect standard technical data such as IP address, browser type and pages visited.</p>
+      <h3>Cookies &amp; advertising (Google AdSense)</h3>
+      <p>This site is supported by advertising, including Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visits here and/or elsewhere on the internet.</p>
+      <p>You can opt out of personalised advertising via <a href="https://www.google.com/settings/ads" rel="nofollow noopener" target="_blank">Google Ads Settings</a>, or opt out of third-party vendor cookies at <a href="https://www.aboutads.info/choices/" rel="nofollow noopener" target="_blank">aboutads.info/choices</a>. See also <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener" target="_blank">how Google uses information from sites that use its services</a>.</p>
+      <h3>Your rights</h3>
+      <p>Depending on where you live (e.g. under GDPR or CCPA) you may have rights to access, correct or delete your data. Contact us at the email above to exercise them. This site is not directed at children under 13.</p>
+      <p class="muted">These policy sections are a starting template, not legal advice. Replace the bracketed placeholders before going live.</p>
+
+      <h2 id="terms">Terms of Use</h2>
+      <p>The game and site are provided free for personal, non-commercial entertainment, "as is" and "as available", without warranties of any kind. Don't misuse the site, interfere with its operation, or redistribute its code without permission. "Snake" refers to a long-established public-domain game concept; this specific implementation and branding are ours. To the fullest extent permitted by law, we're not liable for any loss arising from use of, or inability to use, the site. The site shows ads and may link to third parties whose content and practices we don't control.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="#play">Play</a>
+      <a href="#how">How to play</a>
+      <a href="#about">About</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+    </nav>
+    <small>© 2026 itsthesnakegame.com</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var canvas=document.getElementById("board"),ctx=canvas.getContext("2d");
+  var COLS=24,ROWS=24,CELL=24;
+  canvas.width=COLS*CELL;canvas.height=ROWS*CELL;
+  var scoreEl=document.getElementById("score"),highEl=document.getElementById("high"),
+      overlay=document.getElementById("overlay"),overlayTitle=document.getElementById("overlayTitle"),
+      overlayBody=document.getElementById("overlayBody");
+  var S={READY:"ready",RUNNING:"running",PAUSED:"paused",OVER:"over"},state=S.READY;
+  var snake,dir,nextDir,food,score,high,tickMs,acc,lastTime,rafId;
+
+  function loadHigh(){try{var v=parseInt(localStorage.getItem("its_snake_high")||"0",10);return isFinite(v)?v:0;}catch(e){return 0;}}
+  function saveHigh(v){try{localStorage.setItem("its_snake_high",String(v));}catch(e){}}
+  high=loadHigh();highEl.textContent=high;
+
+  function reset(){
+    var cx=Math.floor(COLS/2),cy=Math.floor(ROWS/2);
+    snake=[{x:cx-1,y:cy},{x:cx,y:cy},{x:cx+1,y:cy}];
+    dir={x:1,y:0};nextDir={x:1,y:0};score=0;tickMs=130;acc=0;
+    scoreEl.textContent="0";placeFood();
+  }
+  function placeFood(){while(true){var p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};
+    if(!snake.some(function(s){return s.x===p.x&&s.y===p.y;})){food=p;return;}}}
+
+  function startGame(){reset();state=S.RUNNING;hide();lastTime=performance.now();cancelAnimationFrame(rafId);rafId=requestAnimationFrame(loop);}
+  function gameOver(){state=S.OVER;if(score>high){high=score;highEl.textContent=high;saveHigh(high);}show("Game over","Score "+score+" · Press <b>Space</b> to play again");draw();}
+  function togglePause(){
+    if(state===S.RUNNING){state=S.PAUSED;show("Paused","Press <b>Space</b> or <b>P</b> to resume");}
+    else if(state===S.PAUSED){state=S.RUNNING;hide();lastTime=performance.now();rafId=requestAnimationFrame(loop);}
+  }
+  function loop(now){
+    if(state!==S.RUNNING)return;
+    var d=now-lastTime;lastTime=now;acc+=d;
+    while(acc>=tickMs){step();acc-=tickMs;if(state!==S.RUNNING)return;}
+    draw();rafId=requestAnimationFrame(loop);
+  }
+  function step(){
+    if(nextDir.x!==-dir.x||nextDir.y!==-dir.y)dir=nextDir;
+    var head=snake[snake.length-1],nx=head.x+dir.x,ny=head.y+dir.y;
+    if(nx<0||ny<0||nx>=COLS||ny>=ROWS){gameOver();return;}
+    var willEat=(nx===food.x&&ny===food.y),body=willEat?snake:snake.slice(1);
+    if(body.some(function(s){return s.x===nx&&s.y===ny;})){gameOver();return;}
+    snake.push({x:nx,y:ny});
+    if(willEat){score+=10;scoreEl.textContent=score;if(tickMs>70)tickMs=Math.max(70,tickMs-3);placeFood();}
+    else{snake.shift();}
+  }
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function draw(){
+    ctx.fillStyle=css("--lcd")||"#aebd94";ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle="rgba(32,41,26,0.10)";ctx.lineWidth=1;
+    for(var x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL+0.5,0);ctx.lineTo(x*CELL+0.5,canvas.height);ctx.stroke();}
+    for(var y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL+0.5);ctx.lineTo(canvas.width,y*CELL+0.5);ctx.stroke();}
+    var ink=css("--ink")||"#20291a";
+    var blink=state===S.RUNNING?(Math.floor(performance.now()/250)%2===0):true;
+    if(blink)cell(food.x,food.y,ink,4);
+    for(var i=0;i<snake.length;i++){var s=snake[i],head=i===snake.length-1;cell(s.x,s.y,ink,head?2:3);if(head)eyes(s);}
+  }
+  function cell(gx,gy,color,inset){ctx.fillStyle=color;ctx.fillRect(gx*CELL+inset,gy*CELL+inset,CELL-inset*2,CELL-inset*2);}
+  function eyes(h){ctx.fillStyle=css("--lcd")||"#aebd94";var px=h.x*CELL,py=h.y*CELL,sz=3,ex=8+dir.x*4,ey=8+dir.y*4;
+    ctx.fillRect(px+ex,py+ey,sz,sz);ctx.fillRect(px+CELL-ex-sz,py+ey,sz,sz);}
+  function show(t,b){overlayTitle.innerHTML=t;overlayBody.innerHTML=b;overlay.hidden=false;}
+  function hide(){overlay.hidden=true;}
+
+  var KEYMAP={ArrowUp:{x:0,y:-1},KeyW:{x:0,y:-1},ArrowDown:{x:0,y:1},KeyS:{x:0,y:1},
+    ArrowLeft:{x:-1,y:0},KeyA:{x:-1,y:0},ArrowRight:{x:1,y:0},KeyD:{x:1,y:0}};
+  window.addEventListener("keydown",function(e){
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Space"].indexOf(e.code)>=0)e.preventDefault();
+    if(e.code==="Space"){(state===S.READY||state===S.OVER)?startGame():togglePause();return;}
+    if(e.code==="KeyP"){togglePause();return;}
+    var d=KEYMAP[e.code];
+    if(d&&state===S.RUNNING&&(d.x!==-dir.x||d.y!==-dir.y))nextDir=d;
+  },{passive:false});
+
+  var touchStart=null;
+  canvas.addEventListener("touchstart",function(e){
+    if(state===S.READY||state===S.OVER)startGame();
+    if(e.touches.length)touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  },{passive:true});
+  canvas.addEventListener("touchend",function(e){
+    if(!touchStart||state!==S.RUNNING){touchStart=null;return;}
+    var t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;
+    if(Math.abs(dx)<20&&Math.abs(dy)<20){touchStart=null;return;}
+    var d=Math.abs(dx)>Math.abs(dy)?{x:dx>0?1:-1,y:0}:{x:0,y:dy>0?1:-1};
+    if(d.x!==-dir.x||d.y!==-dir.y)nextDir=d;touchStart=null;
+  },{passive:true});
+
+  document.querySelectorAll("[data-dir]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var map={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}},d=map[btn.getAttribute("data-dir")];
+      if(state===S.READY||state===S.OVER){startGame();return;}
+      if(d&&state===S.RUNNING&&(d.x!==-dir.x||d.y!==-dir.y))nextDir=d;
+    });
+  });
+  var sb=document.getElementById("startBtn");
+  if(sb)sb.addEventListener("click",function(){state===S.RUNNING?togglePause():startGame();});
+
+  reset();draw();show("It's the Snake Game","Press <b>Space</b> to start<br>Steer with the <b>arrow keys</b>");
+})();
+</script>
+</body>
+</html>
